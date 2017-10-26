@@ -1,4 +1,4 @@
-public main()
-        {
-            //test
-        }
+public class main
+{
+    //asdfasdfasdf
+}
