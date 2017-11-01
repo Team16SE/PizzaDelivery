@@ -5,8 +5,8 @@ public class Order
     private int orderID;
     private double totalCost;
     private Customer cust;
-    private ArrayList<Pizza> pizzas;
-    private ArrayList<Beverage> bevs;
+    private ArrayList<Pizza> pizzas = new ArrayList<>();
+    private ArrayList<Beverage> bevs = new ArrayList<>();
     private boolean delivery;
 
     public Order(int orderID, double totalCost, Customer cust, ArrayList<Pizza> pizzas, ArrayList<Beverage> bevs, boolean delivery)
@@ -15,16 +15,26 @@ public class Order
         this.totalCost = totalCost;
         this.cust = cust;
         this.delivery = delivery;
+        this.pizzas.addAll(pizzas);
+        this.bevs.addAll(bevs);
+    }
+
+    public void finalizeCost()
+    {
+        double pizzaTotal = 0.00;
+        double bevTotal = 0.00;
 
         for(int i = 0; i < pizzas.size(); i++)
         {
-            this.pizzas.set(i, pizzas.get(i));
+            pizzaTotal += (pizzas.get(i)).getCost();
         }
 
         for(int j = 0; j < bevs.size(); j++)
         {
-            this.bevs.set(j, bevs.get(j));
+            bevTotal += (bevs.get(j)).getCost();
         }
+
+        totalCost = bevTotal + pizzaTotal;
     }
 
     public int getOrderID()
@@ -74,18 +84,12 @@ public class Order
 
     public void setPizzas(ArrayList<Pizza> pizzas)
     {
-        for(int i = 0; i < pizzas.size(); i++)
-        {
-            this.pizzas.set(i, pizzas.get(i));
-        }
+        this.pizzas.addAll(pizzas);
     }
 
     public void setBevs(ArrayList<Beverage> bevs)
     {
-        for(int j = 0; j < bevs.size(); j++)
-        {
-            this.bevs.set(j, bevs.get(j));
-        }
+        this.bevs.addAll(bevs);
     }
 
     public void setDelivery(boolean delivery)

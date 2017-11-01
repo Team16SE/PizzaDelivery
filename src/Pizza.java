@@ -2,12 +2,12 @@ import java.util.ArrayList;
 
 public class Pizza
 {
-        private char size;
-        private String crust;
-        private ArrayList<String> toppings;
-        private int topCount;
-        private double cost;
-        private int pizzaKey;
+    private char size;
+    private String crust;
+    private ArrayList<String> toppings = new ArrayList<>();
+    private int topCount;
+    private double cost;
+    private int pizzaKey;
 
     public Pizza(char size, String crust, ArrayList<String> toppings, int topCount, double cost, int pizzaKey)
     {
@@ -16,11 +16,7 @@ public class Pizza
         this.topCount = topCount;
         this.cost = cost;
         this.pizzaKey = pizzaKey;
-
-        for(int i = 0; i < toppings.size(); i++)
-        {
-            this.toppings.set(i, toppings.get(i));
-        }
+        this.toppings.addAll(toppings);
     }
 
     public void finalizeCost()
@@ -92,10 +88,7 @@ public class Pizza
 
     public void setToppings(ArrayList<String> toppings)
     {
-        for(int i = 0; i < toppings.size(); i++)
-        {
-            this.toppings.set(i, toppings.get(i));
-        }
+        this.toppings.addAll(toppings);
     }
 
     public void setTopCount(int topCount)
