@@ -13,7 +13,7 @@ public class Beverage
         this.bevID = bevID;
     }
 
-    void finalizeCost()
+    public void finalizeCost()
     {
         if(size == 's')
         {
@@ -33,42 +33,42 @@ public class Beverage
         }
     }
 
-    char getSize()
+    public char getSize()
     {
         return size;
     }
 
-    double getCost()
+    public double getCost()
     {
         return cost;
     }
 
-    String getName()
+    public String getName()
     {
         return name;
     }
 
-    int getID()
+    public int getID()
     {
         return bevID;
     }
 
-    void setSize(char size)
+    public void setSize(char size)
     {
         this.size = size;
     }
 
-    void setCost(double cost)
+    public void setCost(double cost)
     {
         this.cost = cost;
     }
 
-    void setName(String name)
+    public void setName(String name)
     {
         this.name = name;
     }
 
-    void setID(int bevID)
+    public void setID(int bevID)
     {
         this.bevID = bevID;
     }
