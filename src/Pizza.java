@@ -26,7 +26,7 @@ public class Pizza
     public void finalizeCost()
     {
         double temp1 = 0;
-        double temp2 = 0;
+        double temp2;
 
         if(size == 's')
         {
