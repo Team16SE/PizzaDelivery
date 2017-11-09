@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.io.*;
 
 public class main
 {
@@ -103,5 +104,14 @@ public class main
         System.out.println();
 
         System.out.println("Testing complete.");
+
+        try
+        {
+            ord.logOrder();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

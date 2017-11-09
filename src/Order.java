@@ -1,4 +1,9 @@
 import java.util.ArrayList;
+import java.nio.file.*;
+import java.util.List;
+import java.util.Arrays;
+import java.nio.charset.*;
+import java.io.*;
 
 public class Order
 {
@@ -17,6 +22,41 @@ public class Order
         this.delivery = delivery;
         this.pizzas.addAll(pizzas);
         this.bevs.addAll(bevs);
+    }
+
+    public void logOrder() throws IOException
+    {
+        ArrayList<String> lines = new ArrayList<>();
+        lines.addAll(Arrays.asList("OrderID: " + orderID, "Final Cost: $" + totalCost, "---", "Customer Information: ", "Name: " + cust.getName(), "Address: " + cust.getAddress(), "Charge Type: " + cust.getChargeType(), "Phone Number: " + cust.getPhoneNum()));
+        Path logFile = Paths.get("C:\\Users\\Admin\\IdeaProjects\\Project\\PizzaDelivery\\src\\log\\Orders.log");
+        Files.write(logFile, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
+
+        lines.clear();
+
+        lines.addAll(Arrays.asList("---", "Pizzas Information: "));
+        Files.write(logFile, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
+        lines.clear();
+
+        for(int i = 0; i < pizzas.size(); i++)
+        {
+            lines.addAll(Arrays.asList("Size: " + pizzas.get(i).getSize(), "Crust Type: " + pizzas.get(i).getCrust(), "Pizza Cost: " + Double.toString(pizzas.get(i).getCost()), "Toppings: "));
+            Files.write(logFile, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
+
+            lines.clear();
+            lines.addAll(pizzas.get(i).getToppings());
+            Files.write(logFile, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
+        }
+
+        lines.clear();
+        lines.addAll(Arrays.asList("---", "Beverage Information: "));
+        Files.write(logFile, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
+
+        for(int j = 0; j < bevs.size(); j++)
+        {
+            lines.clear();
+            lines.addAll(Arrays.asList("Size " + Character.toString(bevs.get(j).getSize()), "Name: " + bevs.get(j).getName(), "Cost: " + Double.toString(bevs.get(j).getCost()), "BevID: " + Integer.toString(bevs.get(j).getID())));
+            Files.write(logFile, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
+        }
     }
 
     public void finalizeCost()
