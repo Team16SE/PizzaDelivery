@@ -22,4 +22,5 @@ public class NewPizza {
     private JComboBox drinkTypeBox;
     private JComboBox drinkSizeBox;
     private JButton addSelectionButton;
+    private JComboBox comboBox1;
 }
