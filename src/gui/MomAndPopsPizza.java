@@ -10,8 +10,9 @@ import java.awt.event.MouseEvent;
 public class MomAndPopsPizza {
     private JButton custButton;
     private JPanel startScreen;
-    private JButton orderButton;
-    private JTextField customerPhoneNumberTextField;
+    private JTextField customerPhoneNumTextField;
+    private JButton lookupButton;
+    private JButton newCustomerButton;
 
     public MomAndPopsPizza() {
         custButton.addMouseListener(new MouseAdapter() {
