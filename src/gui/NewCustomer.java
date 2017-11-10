@@ -2,10 +2,8 @@ package gui;
 
 import javax.swing.*;
 
-/**
- * Created by Chris on 11/8/2017.
- */
-public class NewCustomer {
+public class NewCustomer
+{
     private JTextField customerNameTextField;
     private JPanel panel1;
     private JTextField customerPhoneNumberTextField;
@@ -14,4 +12,9 @@ public class NewCustomer {
     private JTextField customerSpecialInfoTextField;
     private JButton OKButton;
     private JButton cancelButton;
+
+    public JPanel getPanel1()
+    {
+        return panel1;
+    }
 }

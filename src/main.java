@@ -1,117 +1,69 @@
-import java.util.ArrayList;
-import java.io.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class main
+import gui.NewCustomer;
+import gui.MomAndPopsPizza;
+import gui.FinalDetails;
+import gui.NewPizza;
+
+public class main extends JFrame
 {
     public static void main(String[] args)
     {
-        //Pizza testing
-        ArrayList<String> toppings = new ArrayList<>();
-        toppings.add("Pepperoni");
-        toppings.add("Sausage");
-        toppings.add("Feta");
+        main guiFrame = new main();
 
-        Pizza pza = new Pizza('m', "Thin", toppings, 3, 0.00, 1);
+        MomAndPopsPizza ss = new MomAndPopsPizza();
+        NewCustomer nc = new NewCustomer();
+        NewPizza np = new NewPizza();
+        FinalDetails fs = new FinalDetails();
 
-        pza.finalizeCost();
+        JPanel mainScreen = ss.getStartScreen();
+        JPanel custInfoScreen = nc.getPanel1();
+        JPanel pizzaScreen = np.getPanel1();
+        JPanel detailsScreen = fs.getPanel1();
 
-        System.out.println();
-        System.out.println("Testing Pizza Class");
-        System.out.println("---");
-        System.out.println("Size: " + pza.getSize());
-        System.out.println("Crust: " + pza.getCrust());
+        guiFrame.getContentPane().add(mainScreen);
+        guiFrame.setVisible(true);
+        guiFrame.repaint();
 
-        ArrayList<String> tempTops = pza.getToppings();
-
-        for(int i = 0; i < tempTops.size(); i++)
+        ss.getNewCustomerButton().addMouseListener(new MouseAdapter()
         {
-            System.out.println("Toppings: " + tempTops.get(i));
-        }
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+                guiFrame.getContentPane().removeAll();
+                guiFrame.getContentPane().add(custInfoScreen);
+                guiFrame.revalidate();
+            }
+        });
 
-        System.out.println("topCount: " + pza.getTopCount());
-        System.out.println("Cost: " + pza.getCost());
-        System.out.println("pizzaKey: " + pza.getPizzaKey());
-        System.out.println();
-
-        //Beverage testing
-        Beverage bev = new Beverage('m', 0.00, "Dr. Pepper", 1);
-
-        bev.finalizeCost();
-
-        System.out.println("Testing Beverage Class");
-        System.out.println("---");
-        System.out.println("Size: " + bev.getSize());
-        System.out.println("Name: " + bev.getName());
-        System.out.println("Cost: " + bev.getCost());
-        System.out.println("BevID: " + bev.getID());
-        System.out.println();
-
-        //Customer testing
-        Customer cust = new Customer("6784518664", "John Doe", "123 Fake St.", "MasterCard","Testing.");
-
-        System.out.println("Testing Customer Class");
-        System.out.println("---");
-        System.out.println("Phone #: " + cust.getPhoneNum());
-        System.out.println("Name: " + cust.getName());
-        System.out.println("Address: " + cust.getAddress());
-        System.out.println("Charge Type: " + cust.getChargeType());
-        System.out.println("Special Info: " + cust.getSpecialInfo());
-        System.out.println();
-
-        //Order testing
-        ArrayList<Pizza> pzas = new ArrayList<>();
-        pzas.add(pza);
-
-        ArrayList<Beverage> bevs = new ArrayList<>();
-        bevs.add(bev);
-
-        Order ord = new Order(1, 0.00, cust, pzas, bevs, true);
-        ord.finalizeCost();
-
-        System.out.println("Testing Order Class");
-        System.out.println("---");
-        System.out.println("OrderID: " + ord.getOrderID());
-        System.out.println("Total cost: " + ord.getTotalCost());
-
-        boolean custPop = false;
-
-        if((ord.getCust()).getPhoneNum().equals("6784518664"))
+        ss.getLookupButton().addMouseListener(new MouseAdapter()
         {
-            custPop = true;
-        }
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+                guiFrame.getContentPane().removeAll();
+                guiFrame.getContentPane().add(pizzaScreen);
+                guiFrame.revalidate();
+            }
+        });
 
-        System.out.println("Customer populated: " + custPop);
 
-        boolean pzaPop = false;
+    }
 
-        if((pzas.get(0)).getPizzaKey() == 1)
-        {
-            pzaPop = true;
-        }
+    public main()
+    {
+        super("Pizza Delivery");
 
-        System.out.println("Pizzas populated: " + pzaPop);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-        boolean bevPop = false;
-
-        if((bevs.get(0)).getID() == 1)
-        {
-            bevPop = true;
-        }
-
-        System.out.println("Bevs populated: " + bevPop);
-        System.out.println("Delivery: " + ord.getDelivery());
-
-        System.out.println();
-
-        System.out.println("Testing complete.");
-
-        try
-        {
-            ord.logOrder();
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
+        pack();
+        setSize(screenSize);
+        setResizable(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }

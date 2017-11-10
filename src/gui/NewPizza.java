@@ -2,10 +2,8 @@ package gui;
 
 import javax.swing.*;
 
-/**
- * Created by Chris on 11/8/2017.
- */
-public class NewPizza {
+public class NewPizza
+{
     private JTextPane orderDetailsTextPane;
     private JPanel panel1;
     private JTextPane costTextPane;
@@ -23,4 +21,9 @@ public class NewPizza {
     private JComboBox drinkSizeBox;
     private JButton addSelectionButton;
     private JComboBox comboBox1;
+
+    public JPanel getPanel1()
+    {
+        return panel1;
+    }
 }
