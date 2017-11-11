@@ -355,6 +355,17 @@ public class main extends JFrame
                         finalDoc.insertString(finalDoc.getLength(), "Beverage: " + ord.getBevs().get(i).getName() + "\n", null);
                         finalDoc.insertString(finalDoc.getLength(), "Size: " + ord.getBevs().get(i).getSize() + "\n", null);
                     }
+
+                    if(np.getDeliveryRadioButton().isSelected())
+                    {
+                        ord.setDelivery(true);
+                        finalDoc.insertString(finalDoc.getLength(), "For Delivery" + Boolean.toString(ord.getDelivery()), null);
+                    }
+                    else
+                    {
+                        ord.setDelivery(false);
+                        finalDoc.insertString(finalDoc.getLength(), "For Pickup", null);
+                    }
                 }
                 catch(BadLocationException except)
                 {

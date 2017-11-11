@@ -20,6 +20,8 @@ public class NewPizza
     private JComboBox drinkTypeBox;
     private JComboBox drinkSizeBox;
     private JButton addSelectionButton;
+    private JRadioButton deliveryRadioButton;
+    private JRadioButton pickupRadioButton;
     private JComboBox comboBox1;
 
     public JPanel getPanel1()
@@ -91,5 +93,11 @@ public class NewPizza
         return pizzaSizeBox;
     }
 
+    public JRadioButton getDeliveryRadioButton() {
+        return deliveryRadioButton;
+    }
 
+    public JRadioButton getPickupRadioButton() {
+        return pickupRadioButton;
+    }
 }

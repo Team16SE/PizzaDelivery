@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.NewPizza">
-  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="11" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="11" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="1083" height="896"/>
@@ -10,7 +10,7 @@
     <children>
       <component id="8d215" class="javax.swing.JTextPane" binding="orderDetailsTextPane" default-binding="true">
         <constraints>
-          <grid row="0" column="2" row-span="9" col-span="1" vsize-policy="6" hsize-policy="6" anchor="1" fill="1" indent="0" use-parent-layout="false">
+          <grid row="0" column="2" row-span="9" col-span="2" vsize-policy="6" hsize-policy="6" anchor="1" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
@@ -21,7 +21,7 @@
       </component>
       <component id="7734e" class="javax.swing.JTextPane" binding="costTextPane" default-binding="true">
         <constraints>
-          <grid row="0" column="3" row-span="9" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="0" column="4" row-span="9" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
@@ -32,7 +32,7 @@
       </component>
       <component id="d71d7" class="javax.swing.JButton" binding="completeOrderButton" default-binding="true">
         <constraints>
-          <grid row="10" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="4" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font size="22"/>
@@ -41,7 +41,7 @@
       </component>
       <component id="a6075" class="javax.swing.JButton" binding="cancelButton" default-binding="true">
         <constraints>
-          <grid row="10" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="6" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="6" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Cancel"/>
@@ -89,14 +89,6 @@
             <item value="M"/>
             <item value="L"/>
           </model>
-        </properties>
-      </component>
-      <component id="b2f6" class="javax.swing.JButton" binding="undoButton" default-binding="true">
-        <constraints>
-          <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Undo"/>
         </properties>
       </component>
       <component id="392ce" class="javax.swing.JCheckBox" binding="bellPepperCheckBox" default-binding="true">
@@ -192,21 +184,29 @@
           </model>
         </properties>
       </component>
-      <component id="e0276" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+      <component id="2398e" class="javax.swing.JRadioButton" binding="pickupRadioButton" default-binding="true">
         <constraints>
-          <grid row="9" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="9" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <model>
-            <item value="Payment Type"/>
-            <item value="Cash"/>
-            <item value="Visa"/>
-            <item value="MasterCard"/>
-            <item value="Discover"/>
-            <item value="American Express"/>
-          </model>
+          <text value="Pickup"/>
+        </properties>
+      </component>
+      <component id="3bfa8" class="javax.swing.JRadioButton" binding="deliveryRadioButton" default-binding="true">
+        <constraints>
+          <grid row="9" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <selected value="true"/>
+          <text value="Delivery"/>
         </properties>
       </component>
     </children>
   </grid>
+  <buttonGroups>
+    <group name="buttonGroup1">
+      <member id="3bfa8"/>
+      <member id="2398e"/>
+    </group>
+  </buttonGroups>
 </form>
