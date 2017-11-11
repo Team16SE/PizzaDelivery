@@ -19,6 +19,11 @@ public class Pizza
         this.toppings.addAll(toppings);
     }
 
+    public Pizza()
+    {
+        return;
+    }
+
     public void finalizeCost()
     {
         double temp1 = 0;

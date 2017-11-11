@@ -15,6 +15,11 @@ public class Customer
         this.specialInfo = specialInfo;
     }
 
+    public Customer()
+    {
+        return;
+    }
+
     public String getPhoneNum()
     {
         return phoneNum;

@@ -13,6 +13,11 @@ public class Beverage
         this.bevID = bevID;
     }
 
+    public Beverage()
+    {
+        return;
+    }
+
     public void finalizeCost()
     {
         if(size == 's')

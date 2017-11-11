@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.nio.file.*;
-import java.util.List;
 import java.util.Arrays;
 import java.nio.charset.*;
 import java.io.*;
@@ -24,10 +23,15 @@ public class Order
         this.bevs.addAll(bevs);
     }
 
+    public Order()
+    {
+        return;
+    }
+
     public void logOrder() throws IOException
     {
         ArrayList<String> lines = new ArrayList<>();
-        lines.addAll(Arrays.asList("OrderID: " + orderID, "Final Cost: $" + totalCost, "---", "Customer Information: ", "Name: " + cust.getName(), "Address: " + cust.getAddress(), "Charge Type: " + cust.getChargeType(), "Phone Number: " + cust.getPhoneNum()));
+        lines.addAll(Arrays.asList("OrderID: " + orderID, "Final Cost: $" + totalCost, "---", "Customer Information: ", "Phone Number: " + cust.getPhoneNum(), "Name: " + cust.getName(), "Address: " + cust.getAddress(), "Charge Type: " + cust.getChargeType()));
         Path logFile = Paths.get("C:\\Users\\Admin\\IdeaProjects\\Project\\PizzaDelivery\\src\\log\\Orders.log");
         Files.write(logFile, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
 
