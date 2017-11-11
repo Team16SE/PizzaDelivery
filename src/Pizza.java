@@ -1,3 +1,4 @@
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class Pizza
@@ -92,5 +93,17 @@ public class Pizza
     public void setCost(double cost)
     {
         this.cost = cost;
+    }
+
+    public String toString(){
+        String tops = "";
+        for(int i = 0; i < topCount; i++)
+            tops = tops + "\t" + toppings.get(i) + "\n";
+                return "Pizza: \nSize: " + size  + "\nCrust: " + crust + "\nToppings: \n" + tops;
+    }
+
+    public String costToString(){
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
+        return "\nPizza Cost:\n" + currencyFormat.format(cost) + "\n";
     }
 }

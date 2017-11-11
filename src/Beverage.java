@@ -1,8 +1,12 @@
+import java.text.NumberFormat;
+
 public class Beverage
 {
     private char size;
     private double cost;
     private String name;
+
+
 
     public Beverage(char size, double cost, String name)
     {
@@ -59,5 +63,15 @@ public class Beverage
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public String toString(){
+        return "Beverage: " + name + "\nSize: " + size + "\n";
+    }
+
+    public String costToString(){
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
+
+        return "\nBeverage Cost: " + currencyFormat.format(cost) + '\n';
     }
 }

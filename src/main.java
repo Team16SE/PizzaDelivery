@@ -254,18 +254,9 @@ public class main extends JFrame
 
                     try
                     {
-                        dishDoc.insertString(dishDoc.getLength(), "\nPizza:\n", null);
-                        dishDoc.insertString(dishDoc.getLength(), "Size: " + pza.getSize() + "\n", null);
-                        dishDoc.insertString(dishDoc.getLength(), "Crust: " + pza.getCrust() + "\n", null);
-                        dishDoc.insertString(dishDoc.getLength(), "Toppings: " + "\n", null);
+                        dishDoc.insertString(dishDoc.getLength(), pza.toString(), null);
 
-                        for(int i = 0; i < pza.getTopCount(); i++)
-                        {
-                            dishDoc.insertString(dishDoc.getLength(), pza.getToppings().get(i) + "\n", null);
-                        }
-
-                        costDoc.insertString(costDoc.getLength(), "\nPizza Cost:\n", null);
-                        costDoc.insertString(costDoc.getLength(), currencyFormat.format(pza.getCost()), null);
+                        costDoc.insertString(costDoc.getLength(), pza.costToString(), null);
                     }
                     catch(BadLocationException exc)
                     {
@@ -288,11 +279,8 @@ public class main extends JFrame
                     try
                     {
                         dishDoc.insertString(dishDoc.getLength(), "\n", null);
-                        dishDoc.insertString(dishDoc.getLength(), "Drink: " + bev.getName() + "\n", null);
-                        dishDoc.insertString(dishDoc.getLength(), "Size: " + bev.getSize() + "\n", null);
-
-                        costDoc.insertString(costDoc.getLength(), "\nBeverage Cost:\n", null);
-                        costDoc.insertString(costDoc.getLength(), currencyFormat.format(bev.getCost()), null);
+                        dishDoc.insertString(dishDoc.getLength(), bev.toString(), null);
+                        costDoc.insertString(costDoc.getLength(), bev.costToString(), null);
                     }
                     catch(BadLocationException exc)
                     {
@@ -316,6 +304,49 @@ public class main extends JFrame
 
                 guiFrame.revalidate();
                 guiFrame.repaint();
+            }
+        });
+
+        np.getUndoButton().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                try {
+                    if (bevs.size() > 0) {
+                        if (dishDoc.getText(dishDoc.getLength() - (bevs.get(bevs.size() - 1).toString().length()),
+                                3).matches("Bev")) {
+
+                            dishDoc.remove(dishDoc.getLength() - (bevs.get(bevs.size() - 1).toString().length()),
+                                    bevs.get(bevs.size() - 1).toString().length());
+
+                            ord.setTotalCost(ord.getTotalCost() - bevs.get(bevs.size() - 1).getCost());
+
+                            costDoc.remove(costDoc.getLength() - (bevs.get(bevs.size() - 1).costToString().length()),
+                                    (bevs.get(bevs.size() - 1).costToString().length()));
+
+                            bevs.remove(bevs.size() - 1);
+                        }
+                    }
+                    if (pzas.size() > 0) {
+                        if (dishDoc.getText(dishDoc.getLength() - (pzas.get(pzas.size() - 1).toString().length()),
+                                3).matches("Piz")) {
+
+                            dishDoc.remove(dishDoc.getLength() - (pzas.get(pzas.size() - 1).toString().length()),
+                                    pzas.get(pzas.size() - 1).toString().length());
+
+                            ord.setTotalCost(ord.getTotalCost() - pzas.get(pzas.size() - 1).getCost());
+
+                            costDoc.remove(costDoc.getLength() - (pzas.get(pzas.size() - 1).costToString().length()),
+                                    (pzas.get(pzas.size() - 1).costToString().length()));
+
+                            pzas.remove(pzas.size() - 1);
+                        }
+                    }
+
+                } catch(BadLocationException exc)
+                {
+                    exc.printStackTrace();
+                }
             }
         });
 
@@ -345,24 +376,15 @@ public class main extends JFrame
 
                     for(int i = 0; i < ord.getPizzas().size(); i++)
                     {
-                        finalDoc.insertString(finalDoc.getLength(), "Pizza:" + "\n", null);
-                        finalDoc.insertString(finalDoc.getLength(), "Size: " + ord.getPizzas().get(i).getSize() + "\n", null);
-                        finalDoc.insertString(finalDoc.getLength(), "Crust: " + ord.getPizzas().get(i).getCrust() + "\n", null);
-                        finalDoc.insertString(finalDoc.getLength(), "Toppings:" + "\n", null);
-
-                        for(int j = 0; j < ord.getPizzas().get(i).getToppings().size(); j++)
-                        {
-                            finalDoc.insertString(finalDoc.getLength(),  "\t" + ord.getPizzas().get(i).getToppings().get(j) + "\n", null);
-                        }
-                        finalDoc.insertString(finalDoc.getLength(), "Cost: " + currencyFormat.format(ord.getPizzas().get(i).getCost()) + "\n", null);
+                        finalDoc.insertString(finalDoc.getLength(), ord.getPizzas().get(i).toString() + "\n", null);
+                        finalDoc.insertString(finalDoc.getLength(),ord.getPizzas().get(i).costToString() + "\n", null);
                     }
 
                     finalDoc.insertString(finalDoc.getLength(), "Beverage Information:" + "\n", null);
                     for(int i = 0; i < ord.getBevs().size(); i++)
                     {
-                        finalDoc.insertString(finalDoc.getLength(), "Beverage: " + ord.getBevs().get(i).getName() + "\n", null);
-                        finalDoc.insertString(finalDoc.getLength(), "Size: " + ord.getBevs().get(i).getSize() + "\n", null);
-                        finalDoc.insertString(finalDoc.getLength(), "Cost: " + currencyFormat.format(ord.getBevs().get(i).getCost()) + "\n", null);
+                        finalDoc.insertString(finalDoc.getLength(), ord.getBevs().get(i).toString() + "\n", null);
+                        finalDoc.insertString(finalDoc.getLength(), ord.getBevs().get(i).costToString() + "\n", null);
                     }
 
                     finalDoc.insertString(finalDoc.getLength(), "Total Cost: " + currencyFormat.format(ord.getTotalCost()) + "\n", null);

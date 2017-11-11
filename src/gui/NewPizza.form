@@ -229,6 +229,14 @@
           <text value="Total:"/>
         </properties>
       </component>
+      <component id="d7fc" class="javax.swing.JButton" binding="undoButton">
+        <constraints>
+          <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Undo"/>
+        </properties>
+      </component>
     </children>
   </grid>
   <buttonGroups>
