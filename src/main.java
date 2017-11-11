@@ -33,16 +33,21 @@ public class main extends JFrame
         guiFrame.setVisible(true);
         guiFrame.repaint();
 
-        Customer cust = new Customer();
-        Pizza pza = new Pizza();
+        ArrayList<String> emptyToppings = new ArrayList<>();
+
+        Customer cust = new Customer("", "", "", "", "");
+        Pizza pza = new Pizza('a', "", emptyToppings, 0, 0.00);
         int pzaCount = 0;
-        Beverage bev = new Beverage();
+        Beverage bev = new Beverage('a', 0.00, "");
         ArrayList<Pizza> pzas = new ArrayList<>();
         ArrayList<Beverage> bevs = new ArrayList<>();
-        Order ord = new Order();
+        Order ord = new Order(0, 0.00, cust, pzas, bevs, false);
 
         StyledDocument dishDoc = np.getOrderDetailsTextPane().getStyledDocument();
         np.getOrderDetailsTextPane().setEditable(false);
+
+        StyledDocument costDoc = np.getCostTextPane().getStyledDocument();
+        np.getCostTextPane().setEditable(false);
 
         ss.getNewCustomerButton().addMouseListener(new MouseAdapter()
         {
@@ -122,6 +127,61 @@ public class main extends JFrame
             }
         });
 
+        nc.getCustomerNameTextField().addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+
+                nc.getCustomerNameTextField().setText("");
+            }
+        });
+
+        nc.getCustomerPhoneNumberTextField().addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+
+                nc.getCustomerPhoneNumberTextField().setText("");
+            }
+        });
+
+        nc.getCustomerChargeTypeTextField().addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+
+                nc.getCustomerChargeTypeTextField().setText("");
+            }
+        });
+
+        nc.getCustomerAddressTextField().addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+
+                nc.getCustomerAddressTextField().setText("");
+            }
+        });
+
+        nc.getCustomerSpecialInfoTextField().addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+
+                nc.getCustomerSpecialInfoTextField().setText("");
+            }
+        });
+
         np.getAddSelectionButton().addMouseListener(new MouseAdapter()
         {
             @Override
@@ -132,7 +192,7 @@ public class main extends JFrame
                 String a = np.getPizzaSizeBox().getSelectedItem().toString();
                 String b = np.getDrinkSizeBox().getSelectedItem().toString();
 
-                if(a.compareTo("N/A") == 0)
+                if(a.compareTo("N/A") != 0)
                 {
                     char c = np.getPizzaSizeBox().getSelectedItem().toString().charAt(0);
 
@@ -175,6 +235,7 @@ public class main extends JFrame
 
                     try
                     {
+                        dishDoc.insertString(dishDoc.getLength(), "\nPizza:\n", null);
                         dishDoc.insertString(dishDoc.getLength(), "Size: " + pza.getSize() + "\n", null);
                         dishDoc.insertString(dishDoc.getLength(), "Crust: " + pza.getCrust() + "\n", null);
                         dishDoc.insertString(dishDoc.getLength(), "Toppings: " + "\n", null);
@@ -183,6 +244,9 @@ public class main extends JFrame
                         {
                             dishDoc.insertString(dishDoc.getLength(), pza.getToppings().get(i) + "\n", null);
                         }
+
+                        costDoc.insertString(costDoc.getLength(), "\nPizza Cost:\n", null);
+                        costDoc.insertString(costDoc.getLength(), Double.toString(pza.getCost()), null);
                     }
                     catch(BadLocationException exc)
                     {
@@ -192,17 +256,23 @@ public class main extends JFrame
                     pzas.add(pza);
                 }
 
-                if(b.compareTo("N/A") == 0)
+                if(b.compareTo("N/A") != 0)
                 {
-                    bev.setSize((char)np.getDrinkSizeBox().getSelectedItem());
+                    char sz = np.getDrinkSizeBox().getSelectedItem().toString().charAt(0);
+
+                    bev.setSize(sz);
                     bev.setName(np.getDrinkTypeBox().getSelectedItem().toString());
                     bev.finalizeCost();
                     bevs.add(bev);
 
                     try
                     {
+                        dishDoc.insertString(dishDoc.getLength(), "\n", null);
+                        dishDoc.insertString(dishDoc.getLength(), "Drink: " + bev.getName() + "\n", null);
                         dishDoc.insertString(dishDoc.getLength(), "Size: " + bev.getSize() + "\n", null);
-                        dishDoc.insertString(dishDoc.getLength(), "Type: " + bev.getName() + "\n", null);
+
+                        costDoc.insertString(costDoc.getLength(), "\nBeverage Cost:\n", null);
+                        costDoc.insertString(costDoc.getLength(), Double.toString(bev.getCost()), null);
                     }
                     catch(BadLocationException exc)
                     {

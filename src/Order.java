@@ -23,11 +23,6 @@ public class Order
         this.bevs.addAll(bevs);
     }
 
-    public Order()
-    {
-        return;
-    }
-
     public void logOrder() throws IOException
     {
         ArrayList<String> lines = new ArrayList<>();

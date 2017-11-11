@@ -11,24 +11,19 @@ public class Beverage
         this.name = name;
     }
 
-    public Beverage()
-    {
-        return;
-    }
-
     public void finalizeCost()
     {
-        if(size == 's')
+        if(size == 'S')
         {
-            cost = 1.00;
+            this.cost = 1.00;
         }
-        else if(size == 'm')
+        else if(size == 'M')
         {
-            cost = 2.00;
+            this.cost = 2.00;
         }
-        else if(size == 'l')
+        else if(size == 'L')
         {
-            cost = 3.00;
+            this.cost = 3.00;
         }
         else
         {

@@ -17,25 +17,20 @@ public class Pizza
         this.toppings.addAll(toppings);
     }
 
-    public Pizza()
-    {
-        return;
-    }
-
     public void finalizeCost()
     {
         double temp1 = 0;
         double temp2;
 
-        if(size == 's')
+        if(size == 'S')
         {
             temp1 = 10.00;
         }
-        else if(size == 'm')
+        else if(size == 'M')
         {
             temp1 = 12.00;
         }
-        else if(size == 'l')
+        else if(size == 'L')
         {
             temp1 = 14.00;
         }
