@@ -13,17 +13,6 @@ public class MomAndPopsPizza
     private JButton lookupButton;
     private JButton newCustomerButton;
 
-    public MomAndPopsPizza()
-    {
-        newCustomerButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e)
-            {
-                super.mouseClicked(e);
-            }
-        });
-    }
-
     public JButton getLookupButton()
    {
        return lookupButton;
@@ -34,13 +23,13 @@ public class MomAndPopsPizza
        return newCustomerButton;
    }
 
-    public JPanel getStartScreen()
-    {
-        return startScreen;
-    }
+   public JPanel getStartScreen()
+   {
+       return startScreen;
+   }
 
-    public JTextField getCustomerPhoneNumTextField()
-    {
-        return customerPhoneNumTextField;
-    }
+   public JTextField getCustomerPhoneNumTextField()
+   {
+       return customerPhoneNumTextField;
+   }
 }

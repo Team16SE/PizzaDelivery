@@ -51,8 +51,6 @@ public class main extends JFrame
                 guiFrame.revalidate();
             }
         });
-
-
     }
 
     public main()
