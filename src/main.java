@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
@@ -51,6 +52,8 @@ public class main extends JFrame
 
         StyledDocument finalDoc = fs.getFinalDetails().getStyledDocument();
         fs.getFinalDetails().setEditable(false);
+
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
         ss.getNewCustomerButton().addMouseListener(new MouseAdapter()
         {
@@ -203,6 +206,7 @@ public class main extends JFrame
             {
                 super.mouseClicked(e);
 
+
                 String a = np.getPizzaSizeBox().getSelectedItem().toString();
                 String b = np.getDrinkSizeBox().getSelectedItem().toString();
 
@@ -247,6 +251,7 @@ public class main extends JFrame
                     pza.setTopCount(topCount);
                     pza.finalizeCost();
 
+
                     try
                     {
                         dishDoc.insertString(dishDoc.getLength(), "\nPizza:\n", null);
@@ -260,13 +265,13 @@ public class main extends JFrame
                         }
 
                         costDoc.insertString(costDoc.getLength(), "\nPizza Cost:\n", null);
-                        costDoc.insertString(costDoc.getLength(), Double.toString(pza.getCost()), null);
+                        costDoc.insertString(costDoc.getLength(), currencyFormat.format(pza.getCost()), null);
                     }
                     catch(BadLocationException exc)
                     {
                         exc.printStackTrace();
                     }
-
+                    ord.setTotalCost(ord.getTotalCost() + pza.getCost());
                     pzas.add(pza);
                 }
 
@@ -277,6 +282,7 @@ public class main extends JFrame
                     bev.setSize(sz);
                     bev.setName(np.getDrinkTypeBox().getSelectedItem().toString());
                     bev.finalizeCost();
+                    ord.setTotalCost(ord.getTotalCost() + bev.getCost());
                     bevs.add(bev);
 
                     try
@@ -286,7 +292,7 @@ public class main extends JFrame
                         dishDoc.insertString(dishDoc.getLength(), "Size: " + bev.getSize() + "\n", null);
 
                         costDoc.insertString(costDoc.getLength(), "\nBeverage Cost:\n", null);
-                        costDoc.insertString(costDoc.getLength(), Double.toString(bev.getCost()), null);
+                        costDoc.insertString(costDoc.getLength(), currencyFormat.format(bev.getCost()), null);
                     }
                     catch(BadLocationException exc)
                     {
@@ -303,6 +309,7 @@ public class main extends JFrame
                 np.getBellPepperCheckBox().setSelected(false);
                 np.getDrinkSizeBox().setSelectedIndex(0);
                 np.getDrinkTypeBox().setSelectedIndex(0);
+                np.setTotalField(currencyFormat.format(ord.getTotalCost()));
 
                 np.getOrderDetailsTextPane().revalidate();
                 np.getOrderDetailsTextPane().repaint();
@@ -345,8 +352,9 @@ public class main extends JFrame
 
                         for(int j = 0; j < ord.getPizzas().get(i).getToppings().size(); j++)
                         {
-                            finalDoc.insertString(finalDoc.getLength(), ord.getPizzas().get(i).getToppings().get(j) + "\n", null);
+                            finalDoc.insertString(finalDoc.getLength(),  "\t" + ord.getPizzas().get(i).getToppings().get(j) + "\n", null);
                         }
+                        finalDoc.insertString(finalDoc.getLength(), "Cost: " + currencyFormat.format(ord.getPizzas().get(i).getCost()) + "\n", null);
                     }
 
                     finalDoc.insertString(finalDoc.getLength(), "Beverage Information:" + "\n", null);
@@ -354,7 +362,10 @@ public class main extends JFrame
                     {
                         finalDoc.insertString(finalDoc.getLength(), "Beverage: " + ord.getBevs().get(i).getName() + "\n", null);
                         finalDoc.insertString(finalDoc.getLength(), "Size: " + ord.getBevs().get(i).getSize() + "\n", null);
+                        finalDoc.insertString(finalDoc.getLength(), "Cost: " + currencyFormat.format(ord.getBevs().get(i).getCost()) + "\n", null);
                     }
+
+                    finalDoc.insertString(finalDoc.getLength(), "Total Cost: " + currencyFormat.format(ord.getTotalCost()) + "\n", null);
 
                     if(np.getDeliveryRadioButton().isSelected())
                     {

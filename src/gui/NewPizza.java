@@ -22,6 +22,7 @@ public class NewPizza
     private JButton addSelectionButton;
     private JRadioButton deliveryRadioButton;
     private JRadioButton pickupRadioButton;
+    private JTextField totalField;
     private JComboBox comboBox1;
 
     public JPanel getPanel1()
@@ -100,4 +101,6 @@ public class NewPizza
     public JRadioButton getPickupRadioButton() {
         return pickupRadioButton;
     }
+
+    public void setTotalField(String s) { totalField.setText(s);}
 }
