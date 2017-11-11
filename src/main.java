@@ -297,6 +297,20 @@ public class main extends JFrame
                 guiFrame.repaint();
             }
         });
+
+        np.getCompleteOrderButton().addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+
+                guiFrame.getContentPane().removeAll();
+                guiFrame.getContentPane().add(detailsScreen);
+                guiFrame.revalidate();
+                guiFrame.repaint();
+            }
+        });
     }
 
     public main()
