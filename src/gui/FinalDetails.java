@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class FinalDetails
 {
-    private JTextPane textArea1;
+    private JTextPane finalDetails;
     private JButton completeOrderButton;
     private JPanel panel1;
 
@@ -13,13 +13,11 @@ public class FinalDetails
         return panel1;
     }
 
-    public JButton getCompleteOrderButton()
-    {
-        return completeOrderButton;
+    public JTextPane getFinalDetails() {
+        return finalDetails;
     }
 
-    public JTextPane getTextArea1()
-    {
-        return textArea1;
+    public JButton getCompleteOrderButton() {
+        return completeOrderButton;
     }
 }

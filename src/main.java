@@ -49,6 +49,9 @@ public class main extends JFrame
         StyledDocument costDoc = np.getCostTextPane().getStyledDocument();
         np.getCostTextPane().setEditable(false);
 
+        StyledDocument finalDoc = fs.getFinalDetails().getStyledDocument();
+        fs.getFinalDetails().setEditable(false);
+
         ss.getNewCustomerButton().addMouseListener(new MouseAdapter()
         {
             @Override
@@ -69,19 +72,19 @@ public class main extends JFrame
             {
                 super.mouseClicked(e);
 
-                Path logFile = Paths.get("C:\\Users\\Admin\\IdeaProjects\\Project\\PizzaDelivery\\src\\log\\Orders.log");
+                Path logFile = Paths.get("src\\Orders.log");
 
                 try
                 {
                     List<String> lines = Files.readAllLines(logFile);
 
-                    String target = ss.getCustomerPhoneNumTextField().getText();
+                    String target = "Phone Number: " + ss.getCustomerPhoneNumTextField().getText().toString();
 
                     for(int i = 0; i < lines.size(); i++)
                     {
-                        if(lines.get(i).equals(target))
+                        if(lines.get(i).compareTo(target) == 0)
                         {
-                            cust.setPhoneNum(target);
+                            cust.setPhoneNum(target.substring(14));
                             cust.setName(lines.get(i+1));
                             cust.setAddress(lines.get(i+2));
                             cust.setChargeType(lines.get(i+3));
@@ -124,6 +127,17 @@ public class main extends JFrame
                 guiFrame.getContentPane().add(pizzaScreen);
                 guiFrame.revalidate();
                 guiFrame.repaint();
+            }
+        });
+
+        ss.getCustomerPhoneNumTextField().addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+
+                ss.getCustomerPhoneNumTextField().setText("");
             }
         });
 
@@ -305,10 +319,72 @@ public class main extends JFrame
             {
                 super.mouseClicked(e);
 
+                ord.setBevs(bevs);
+                ord.setPizzas(pzas);
+                ord.finalizeCost();
+                ord.setOrderID(1);
+                ord.setDelivery(false);
+
+                try
+                {
+                    finalDoc.insertString(finalDoc.getLength(), "Customer Information:" + "\n", null);
+                    finalDoc.insertString(finalDoc.getLength(), "Phone Number: " + ord.getCust().getPhoneNum() + "\n", null);
+                    finalDoc.insertString(finalDoc.getLength(), "Name: " + ord.getCust().getName() + "\n", null);
+                    finalDoc.insertString(finalDoc.getLength(), "Address: " + ord.getCust().getAddress() + "\n", null);
+                    finalDoc.insertString(finalDoc.getLength(), "Charge Type: " + ord.getCust().getChargeType() + "\n", null);
+                    finalDoc.insertString(finalDoc.getLength(), "Special Info: " + ord.getCust().getSpecialInfo() + "\n", null);
+
+                    finalDoc.insertString(finalDoc.getLength(), "Dishes Information:" + "\n", null);
+
+                    for(int i = 0; i < ord.getPizzas().size(); i++)
+                    {
+                        finalDoc.insertString(finalDoc.getLength(), "Pizza:" + "\n", null);
+                        finalDoc.insertString(finalDoc.getLength(), "Size: " + ord.getPizzas().get(i).getSize() + "\n", null);
+                        finalDoc.insertString(finalDoc.getLength(), "Crust: " + ord.getPizzas().get(i).getCrust() + "\n", null);
+                        finalDoc.insertString(finalDoc.getLength(), "Toppings:" + "\n", null);
+
+                        for(int j = 0; j < ord.getPizzas().get(i).getToppings().size(); j++)
+                        {
+                            finalDoc.insertString(finalDoc.getLength(), ord.getPizzas().get(i).getToppings().get(j) + "\n", null);
+                        }
+                    }
+
+                    finalDoc.insertString(finalDoc.getLength(), "Beverage Information:" + "\n", null);
+                    for(int i = 0; i < ord.getBevs().size(); i++)
+                    {
+                        finalDoc.insertString(finalDoc.getLength(), "Beverage: " + ord.getBevs().get(i).getName() + "\n", null);
+                        finalDoc.insertString(finalDoc.getLength(), "Size: " + ord.getBevs().get(i).getSize() + "\n", null);
+                    }
+                }
+                catch(BadLocationException except)
+                {
+                    except.printStackTrace();
+                }
+
                 guiFrame.getContentPane().removeAll();
                 guiFrame.getContentPane().add(detailsScreen);
                 guiFrame.revalidate();
                 guiFrame.repaint();
+            }
+        });
+
+        fs.getCompleteOrderButton().addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+
+                try
+                {
+                    ord.logOrder();
+                }
+                catch(IOException excp)
+                {
+                    excp.printStackTrace();
+                }
+
+                guiFrame.dispose();
             }
         });
     }

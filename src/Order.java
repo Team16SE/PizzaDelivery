@@ -26,8 +26,8 @@ public class Order
     public void logOrder() throws IOException
     {
         ArrayList<String> lines = new ArrayList<>();
-        lines.addAll(Arrays.asList("OrderID: " + orderID, "Final Cost: $" + totalCost, "---", "Customer Information: ", "Phone Number: " + cust.getPhoneNum(), "Name: " + cust.getName(), "Address: " + cust.getAddress(), "Charge Type: " + cust.getChargeType()));
-        Path logFile = Paths.get("C:\\Users\\Admin\\IdeaProjects\\Project\\PizzaDelivery\\src\\log\\Orders.log");
+        lines.addAll(Arrays.asList("OrderID: " + orderID, "Final Cost: $" + totalCost, "---", "Customer Information: ", "Phone Number: " + cust.getPhoneNum(), "Name: " + cust.getName(), "Address: " + cust.getAddress(), "Charge Type: " + cust.getChargeType(), "Special Info: " + cust.getSpecialInfo()));
+        Path logFile = Paths.get("src\\Orders.log");
         Files.write(logFile, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
 
         lines.clear();
