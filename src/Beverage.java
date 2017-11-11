@@ -3,14 +3,12 @@ public class Beverage
     private char size;
     private double cost;
     private String name;
-    private int bevID;
 
-    public Beverage(char size, double cost, String name, int bevID)
+    public Beverage(char size, double cost, String name)
     {
         this.size = size;
         this.cost = cost;
         this.name = name;
-        this.bevID = bevID;
     }
 
     public Beverage()
@@ -53,11 +51,6 @@ public class Beverage
         return name;
     }
 
-    public int getID()
-    {
-        return bevID;
-    }
-
     public void setSize(char size)
     {
         this.size = size;
@@ -71,10 +64,5 @@ public class Beverage
     public void setName(String name)
     {
         this.name = name;
-    }
-
-    public void setID(int bevID)
-    {
-        this.bevID = bevID;
     }
 }

@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="e3c76" class="javax.swing.JTextPane" binding="orderDetailsTextPane" default-binding="true">
+      <component id="8d215" class="javax.swing.JTextPane" binding="orderDetailsTextPane" default-binding="true">
         <constraints>
           <grid row="0" column="2" row-span="9" col-span="1" vsize-policy="6" hsize-policy="6" anchor="1" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
@@ -85,9 +85,9 @@
         <properties>
           <model>
             <item value="N/A"/>
-            <item value="Small"/>
-            <item value="Medium"/>
-            <item value="Large"/>
+            <item value="S"/>
+            <item value="M"/>
+            <item value="L"/>
           </model>
         </properties>
       </component>
@@ -186,9 +186,9 @@
         <properties>
           <model>
             <item value="N/A"/>
-            <item value="Small"/>
-            <item value="Medium"/>
-            <item value="Large"/>
+            <item value="S"/>
+            <item value="M"/>
+            <item value="L"/>
           </model>
         </properties>
       </component>

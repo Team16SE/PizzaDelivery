@@ -7,15 +7,13 @@ public class Pizza
     private ArrayList<String> toppings = new ArrayList<>();
     private int topCount;
     private double cost;
-    private int pizzaKey;
 
-    public Pizza(char size, String crust, ArrayList<String> toppings, int topCount, double cost, int pizzaKey)
+    public Pizza(char size, String crust, ArrayList<String> toppings, int topCount, double cost)
     {
         this.size = size;
         this.crust = crust;
         this.topCount = topCount;
         this.cost = cost;
-        this.pizzaKey = pizzaKey;
         this.toppings.addAll(toppings);
     }
 
@@ -76,11 +74,6 @@ public class Pizza
         return cost;
     }
 
-    public int getPizzaKey()
-    {
-        return pizzaKey;
-    }
-
     public void setSize(char size)
     {
         this.size = size;
@@ -104,10 +97,5 @@ public class Pizza
     public void setCost(double cost)
     {
         this.cost = cost;
-    }
-
-    public void setPizzaKey(int pizzaKey)
-    {
-        this.pizzaKey = pizzaKey;
     }
 }

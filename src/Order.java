@@ -58,7 +58,7 @@ public class Order
         for(int j = 0; j < bevs.size(); j++)
         {
             lines.clear();
-            lines.addAll(Arrays.asList("Size " + Character.toString(bevs.get(j).getSize()), "Name: " + bevs.get(j).getName(), "Cost: " + Double.toString(bevs.get(j).getCost()), "BevID: " + Integer.toString(bevs.get(j).getID())));
+            lines.addAll(Arrays.asList("Size " + Character.toString(bevs.get(j).getSize()), "Name: " + bevs.get(j).getName(), "Cost: " + Double.toString(bevs.get(j).getCost())));
             Files.write(logFile, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
         }
     }

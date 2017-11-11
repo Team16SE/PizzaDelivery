@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.util.ArrayList;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -32,8 +35,14 @@ public class main extends JFrame
 
         Customer cust = new Customer();
         Pizza pza = new Pizza();
+        int pzaCount = 0;
         Beverage bev = new Beverage();
+        ArrayList<Pizza> pzas = new ArrayList<>();
+        ArrayList<Beverage> bevs = new ArrayList<>();
         Order ord = new Order();
+
+        StyledDocument dishDoc = np.getOrderDetailsTextPane().getStyledDocument();
+        np.getOrderDetailsTextPane().setEditable(false);
 
         ss.getNewCustomerButton().addMouseListener(new MouseAdapter()
         {
@@ -44,6 +53,7 @@ public class main extends JFrame
                 guiFrame.getContentPane().removeAll();
                 guiFrame.getContentPane().add(custInfoScreen);
                 guiFrame.revalidate();
+                guiFrame.repaint();
             }
         });
 
@@ -87,6 +97,7 @@ public class main extends JFrame
                 guiFrame.getContentPane().removeAll();
                 guiFrame.getContentPane().add(pizzaScreen);
                 guiFrame.revalidate();
+                guiFrame.repaint();
             }
         });
 
@@ -107,6 +118,113 @@ public class main extends JFrame
                 guiFrame.getContentPane().removeAll();
                 guiFrame.getContentPane().add(pizzaScreen);
                 guiFrame.revalidate();
+                guiFrame.repaint();
+            }
+        });
+
+        np.getAddSelectionButton().addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                super.mouseClicked(e);
+
+                String a = np.getPizzaSizeBox().getSelectedItem().toString();
+                String b = np.getDrinkSizeBox().getSelectedItem().toString();
+
+                if(a.compareTo("N/A") == 0)
+                {
+                    char c = np.getPizzaSizeBox().getSelectedItem().toString().charAt(0);
+
+                    pza.setSize(c);
+                    pza.setCrust(np.getCrustTypeBox().getSelectedItem().toString());
+
+                    ArrayList<String> tops = new ArrayList<>();
+
+                    int topCount = 0;
+
+                    if(np.getBellPepperCheckBox().isSelected())
+                    {
+                        tops.add("Bell Peppers");
+                        topCount++;
+                    }
+                    if(np.getExtraCheeseCheckBox().isSelected())
+                    {
+                        tops.add("Extra Cheese");
+                        topCount++;
+                    }
+                    if(np.getMushroomCheckBox().isSelected())
+                    {
+                        tops.add("Mushrooms");
+                        topCount++;
+                    }
+                    if(np.getPepperoniCheckBox().isSelected())
+                    {
+                        tops.add("Pepperoni");
+                        topCount++;
+                    }
+                    if(np.getSausageCheckBox().isSelected())
+                    {
+                        tops.add("Sausage");
+                        topCount++;
+                    }
+
+                    pza.setToppings(tops);
+                    pza.setTopCount(topCount);
+                    pza.finalizeCost();
+
+                    try
+                    {
+                        dishDoc.insertString(dishDoc.getLength(), "Size: " + pza.getSize() + "\n", null);
+                        dishDoc.insertString(dishDoc.getLength(), "Crust: " + pza.getCrust() + "\n", null);
+                        dishDoc.insertString(dishDoc.getLength(), "Toppings: " + "\n", null);
+
+                        for(int i = 0; i < pza.getTopCount(); i++)
+                        {
+                            dishDoc.insertString(dishDoc.getLength(), pza.getToppings().get(i) + "\n", null);
+                        }
+                    }
+                    catch(BadLocationException exc)
+                    {
+                        exc.printStackTrace();
+                    }
+
+                    pzas.add(pza);
+                }
+
+                if(b.compareTo("N/A") == 0)
+                {
+                    bev.setSize((char)np.getDrinkSizeBox().getSelectedItem());
+                    bev.setName(np.getDrinkTypeBox().getSelectedItem().toString());
+                    bev.finalizeCost();
+                    bevs.add(bev);
+
+                    try
+                    {
+                        dishDoc.insertString(dishDoc.getLength(), "Size: " + bev.getSize() + "\n", null);
+                        dishDoc.insertString(dishDoc.getLength(), "Type: " + bev.getName() + "\n", null);
+                    }
+                    catch(BadLocationException exc)
+                    {
+                        exc.printStackTrace();
+                    }
+                }
+
+                np.getCrustTypeBox().setSelectedIndex(0);
+                np.getPizzaSizeBox().setSelectedIndex(0);
+                np.getSausageCheckBox().setSelected(false);
+                np.getPepperoniCheckBox().setSelected(false);
+                np.getMushroomCheckBox().setSelected(false);
+                np.getExtraCheeseCheckBox().setSelected(false);
+                np.getBellPepperCheckBox().setSelected(false);
+                np.getDrinkSizeBox().setSelectedIndex(0);
+                np.getDrinkTypeBox().setSelectedIndex(0);
+
+                np.getOrderDetailsTextPane().revalidate();
+                np.getOrderDetailsTextPane().repaint();
+
+                guiFrame.revalidate();
+                guiFrame.repaint();
             }
         });
     }
