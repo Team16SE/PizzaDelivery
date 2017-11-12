@@ -97,9 +97,11 @@ public class Pizza
 
     public String toString(){
         String tops = "";
-        for(int i = 0; i < topCount; i++)
-            tops = tops + "\t" + toppings.get(i) + "\n";
-                return "Pizza: \nSize: " + size  + "\nCrust: " + crust + "\nToppings: \n" + tops;
+        if (topCount > 0) {
+            for (int i = 0; i < topCount; i++)
+                tops = tops + "\t" + toppings.get(i) + "\n";
+        } else tops = "None\n";
+                return "Pizza: \nSize: " + size  + "\nCrust: " + crust + "\nToppings: \n" + tops + "\n";
     }
 
     public String costToString(){

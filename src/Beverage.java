@@ -66,7 +66,7 @@ public class Beverage
     }
 
     public String toString(){
-        return "Beverage: " + name + "\nSize: " + size + "\n";
+        return "Beverage: " + name + "\nSize: " + size + "\n\n";
     }
 
     public String costToString(){

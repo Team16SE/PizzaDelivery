@@ -281,7 +281,6 @@ public class main extends JFrame
 
                     try
                     {
-                        dishDoc.insertString(dishDoc.getLength(), "\n", null);
                         dishDoc.insertString(dishDoc.getLength(), bev.toString(), null);
                         costDoc.insertString(costDoc.getLength(), bev.costToString(), null);
                     }
@@ -315,6 +314,7 @@ public class main extends JFrame
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 try {
+                    boolean hasUndone = false;
                     if (bevs.size() > 0) {
                         if (dishDoc.getText(dishDoc.getLength() - (bevs.get(bevs.size() - 1).toString().length()),
                                 3).matches("Bev")) {
@@ -323,14 +323,18 @@ public class main extends JFrame
                                     bevs.get(bevs.size() - 1).toString().length());
 
                             ord.setTotalCost(ord.getTotalCost() - bevs.get(bevs.size() - 1).getCost());
+                            np.setTotalField(currencyFormat.format(ord.getTotalCost()));
+
 
                             costDoc.remove(costDoc.getLength() - (bevs.get(bevs.size() - 1).costToString().length()),
                                     (bevs.get(bevs.size() - 1).costToString().length()));
 
                             bevs.remove(bevs.size() - 1);
+
+                            hasUndone =true;
                         }
                     }
-                    if (pzas.size() > 0) {
+                    if (pzas.size() > 0 && !hasUndone) {
                         if (dishDoc.getText(dishDoc.getLength() - (pzas.get(pzas.size() - 1).toString().length()),
                                 3).matches("Piz")) {
 
@@ -338,6 +342,7 @@ public class main extends JFrame
                                     pzas.get(pzas.size() - 1).toString().length());
 
                             ord.setTotalCost(ord.getTotalCost() - pzas.get(pzas.size() - 1).getCost());
+                            np.setTotalField(currencyFormat.format(ord.getTotalCost()));
 
                             costDoc.remove(costDoc.getLength() - (pzas.get(pzas.size() - 1).costToString().length()),
                                     (pzas.get(pzas.size() - 1).costToString().length()));
