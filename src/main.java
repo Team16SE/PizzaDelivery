@@ -199,6 +199,25 @@ public class main extends JFrame
             }
         });
 
+        nc.getCancelButton().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                nc.getCustomerNameTextField().setText("Customer Name");
+                nc.getCustomerPhoneNumberTextField().setText("Customer Phone Number");
+                nc.getCustomerChargeTypeTextField().setText("Customer Charge Type");
+                nc.getCustomerAddressTextField().setText("Customer Address");
+                nc.getCustomerSpecialInfoTextField().setText("Customer Special Info");
+
+                guiFrame.getContentPane().removeAll();
+                guiFrame.getContentPane().add(mainScreen);
+                guiFrame.revalidate();
+                guiFrame.repaint();
+
+            }
+        });
+
         np.getAddSelectionButton().addMouseListener(new MouseAdapter()
         {
             @Override
@@ -306,6 +325,36 @@ public class main extends JFrame
 
                 guiFrame.revalidate();
                 guiFrame.repaint();
+            }
+        });
+
+        np.getCancelButton().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                pzas.clear();
+                bevs.clear();
+
+                np.getCrustTypeBox().setSelectedIndex(0);
+                np.getPizzaSizeBox().setSelectedIndex(0);
+                np.getSausageCheckBox().setSelected(false);
+                np.getPepperoniCheckBox().setSelected(false);
+                np.getMushroomCheckBox().setSelected(false);
+                np.getExtraCheeseCheckBox().setSelected(false);
+                np.getBellPepperCheckBox().setSelected(false);
+                np.getDrinkSizeBox().setSelectedIndex(0);
+                np.getDrinkTypeBox().setSelectedIndex(0);
+                np.setTotalField("");
+                np.getOrderDetailsTextPane().setText("Order Detail:\n\n");
+                np.getCostTextPane().setText("Prices:\n\n");
+
+                guiFrame.getContentPane().removeAll();
+                guiFrame.getContentPane().add(mainScreen);
+                guiFrame.revalidate();
+                guiFrame.repaint();
+
+
             }
         });
 
