@@ -37,7 +37,7 @@ public class main extends JFrame
         ArrayList<String> emptyToppings = new ArrayList<>();
 
         Customer cust = new Customer("", "", "", "", "");
-        Pizza pza = new Pizza('a', "", emptyToppings, 0, 0.00);
+        //Pizza pza = new Pizza('a', "", emptyToppings, 0, 0.00);
         int pzaCount = 0;
         Beverage bev = new Beverage('a', 0.00, "");
         ArrayList<Pizza> pzas = new ArrayList<>();
@@ -270,6 +270,7 @@ public class main extends JFrame
 
                 if(b.compareTo("N/A") != 0)
                 {
+                    Beverage bev = new Beverage('a', 0.00, "");
                     char sz = np.getDrinkSizeBox().getSelectedItem().toString().charAt(0);
 
                     bev.setSize(sz);
