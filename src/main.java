@@ -212,12 +212,14 @@ public class main extends JFrame
 
                 if(a.compareTo("N/A") != 0)
                 {
+                    Pizza pza = new Pizza('a', "", emptyToppings, 0, 0.00);
                     char c = np.getPizzaSizeBox().getSelectedItem().toString().charAt(0);
 
                     pza.setSize(c);
                     pza.setCrust(np.getCrustTypeBox().getSelectedItem().toString());
 
                     ArrayList<String> tops = new ArrayList<>();
+                    tops.clear();
 
                     int topCount = 0;
 
@@ -392,7 +394,7 @@ public class main extends JFrame
                     if(np.getDeliveryRadioButton().isSelected())
                     {
                         ord.setDelivery(true);
-                        finalDoc.insertString(finalDoc.getLength(), "For Delivery" + Boolean.toString(ord.getDelivery()), null);
+                        finalDoc.insertString(finalDoc.getLength(), "For Delivery", null);
                     }
                     else
                     {
