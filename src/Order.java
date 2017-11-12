@@ -26,7 +26,7 @@ public class Order
     public void logOrder() throws IOException
     {
         ArrayList<String> lines = new ArrayList<>();
-        lines.addAll(Arrays.asList("OrderID: " + orderID, "Final Cost: $" + totalCost, "---", "Customer Information: ", "Phone Number: " + cust.getPhoneNum(), "Name: " + cust.getName(), "Address: " + cust.getAddress(), "Charge Type: " + cust.getChargeType(), "Special Info: " + cust.getSpecialInfo()));
+        lines.addAll(Arrays.asList("","Final Cost: $" + totalCost, "---", "Customer Information: ", "Phone Number: " + cust.getPhoneNum(), "Name: " + cust.getName(), "Address: " + cust.getAddress(), "Charge Type: " + cust.getChargeType(), "Special Info: " + cust.getSpecialInfo()));
         Path logFile = Paths.get("src\\Orders.log");
         Files.write(logFile, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
 
@@ -44,6 +44,7 @@ public class Order
             lines.clear();
             lines.addAll(pizzas.get(i).getToppings());
             Files.write(logFile, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
+            lines.clear();
         }
 
         lines.clear();
@@ -56,6 +57,10 @@ public class Order
             lines.addAll(Arrays.asList("Size " + Character.toString(bevs.get(j).getSize()), "Name: " + bevs.get(j).getName(), "Cost: " + Double.toString(bevs.get(j).getCost())));
             Files.write(logFile, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
         }
+
+        lines.clear();
+        lines.add("Order ID: " + orderID);
+        Files.write(logFile, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
     }
 
     public void finalizeCost()
