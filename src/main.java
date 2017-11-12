@@ -88,10 +88,10 @@ public class main extends JFrame
                         if(lines.get(i).compareTo(target) == 0)
                         {
                             cust.setPhoneNum(target.substring(14));
-                            cust.setName(lines.get(i+1));
-                            cust.setAddress(lines.get(i+2));
-                            cust.setChargeType(lines.get(i+3));
-                            cust.setSpecialInfo(lines.get(i+4));
+                            cust.setName(lines.get(i+1).substring(6));
+                            cust.setAddress(lines.get(i+2).substring(9));
+                            cust.setChargeType(lines.get(i+3).substring(13));
+                            cust.setSpecialInfo(lines.get(i+4).substring(14));
                             break;
                         }
                         else
