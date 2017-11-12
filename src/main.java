@@ -199,6 +199,25 @@ public class main extends JFrame
             }
         });
 
+        nc.getCancelButton().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                nc.getCustomerNameTextField().setText("Customer Name");
+                nc.getCustomerPhoneNumberTextField().setText("Customer Phone Number");
+                nc.getCustomerChargeTypeTextField().setText("Customer Charge Type");
+                nc.getCustomerAddressTextField().setText("Customer Address");
+                nc.getCustomerSpecialInfoTextField().setText("Customer Special Info");
+
+                guiFrame.getContentPane().removeAll();
+                guiFrame.getContentPane().add(mainScreen);
+                guiFrame.revalidate();
+                guiFrame.repaint();
+
+            }
+        });
+
         np.getAddSelectionButton().addMouseListener(new MouseAdapter()
         {
             @Override
@@ -281,7 +300,6 @@ public class main extends JFrame
 
                     try
                     {
-                        dishDoc.insertString(dishDoc.getLength(), "\n", null);
                         dishDoc.insertString(dishDoc.getLength(), bev.toString(), null);
                         costDoc.insertString(costDoc.getLength(), bev.costToString(), null);
                     }
@@ -310,11 +328,42 @@ public class main extends JFrame
             }
         });
 
+        np.getCancelButton().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                pzas.clear();
+                bevs.clear();
+
+                np.getCrustTypeBox().setSelectedIndex(0);
+                np.getPizzaSizeBox().setSelectedIndex(0);
+                np.getSausageCheckBox().setSelected(false);
+                np.getPepperoniCheckBox().setSelected(false);
+                np.getMushroomCheckBox().setSelected(false);
+                np.getExtraCheeseCheckBox().setSelected(false);
+                np.getBellPepperCheckBox().setSelected(false);
+                np.getDrinkSizeBox().setSelectedIndex(0);
+                np.getDrinkTypeBox().setSelectedIndex(0);
+                np.setTotalField("");
+                np.getOrderDetailsTextPane().setText("Order Detail:\n\n");
+                np.getCostTextPane().setText("Prices:\n\n");
+
+                guiFrame.getContentPane().removeAll();
+                guiFrame.getContentPane().add(mainScreen);
+                guiFrame.revalidate();
+                guiFrame.repaint();
+
+
+            }
+        });
+
         np.getUndoButton().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 try {
+                    boolean hasUndone = false;
                     if (bevs.size() > 0) {
                         if (dishDoc.getText(dishDoc.getLength() - (bevs.get(bevs.size() - 1).toString().length()),
                                 3).matches("Bev")) {
@@ -323,14 +372,18 @@ public class main extends JFrame
                                     bevs.get(bevs.size() - 1).toString().length());
 
                             ord.setTotalCost(ord.getTotalCost() - bevs.get(bevs.size() - 1).getCost());
+                            np.setTotalField(currencyFormat.format(ord.getTotalCost()));
+
 
                             costDoc.remove(costDoc.getLength() - (bevs.get(bevs.size() - 1).costToString().length()),
                                     (bevs.get(bevs.size() - 1).costToString().length()));
 
                             bevs.remove(bevs.size() - 1);
+
+                            hasUndone =true;
                         }
                     }
-                    if (pzas.size() > 0) {
+                    if (pzas.size() > 0 && !hasUndone) {
                         if (dishDoc.getText(dishDoc.getLength() - (pzas.get(pzas.size() - 1).toString().length()),
                                 3).matches("Piz")) {
 
@@ -338,6 +391,7 @@ public class main extends JFrame
                                     pzas.get(pzas.size() - 1).toString().length());
 
                             ord.setTotalCost(ord.getTotalCost() - pzas.get(pzas.size() - 1).getCost());
+                            np.setTotalField(currencyFormat.format(ord.getTotalCost()));
 
                             costDoc.remove(costDoc.getLength() - (pzas.get(pzas.size() - 1).costToString().length()),
                                     (pzas.get(pzas.size() - 1).costToString().length()));

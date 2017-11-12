@@ -16,7 +16,7 @@
         </constraints>
         <properties>
           <font size="32"/>
-          <text value="Order Details:"/>
+          <text value="Order Details:&#10;&#10;"/>
         </properties>
       </component>
       <component id="7734e" class="javax.swing.JTextPane" binding="costTextPane" default-binding="true">
@@ -27,7 +27,7 @@
         </constraints>
         <properties>
           <font size="32"/>
-          <text value="Prices:"/>
+          <text value="Prices:&#10;"/>
         </properties>
       </component>
       <component id="a6075" class="javax.swing.JButton" binding="cancelButton" default-binding="true">
